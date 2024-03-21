@@ -29,9 +29,9 @@ io.on('connection' , (socket) => {
   });
 
   socket.on('chat message', (data) => {
-    const { roomId, message } = data;
+    const { roomId, sender, message, sentTime } = data;
     console.log(`Received message: ${message} in room: ${roomId}`);
-    io.to(roomId).emit('chat message', message);
+    io.to(roomId).emit('chat message', data);
   });
 
   socket.on('disconnect', () => {
