@@ -7,11 +7,11 @@ const cors = require('cors');
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
-    cors: {
-      origin: "http://localhost:3000",
-      methods: ["GET", "POST"]
-    }
-  });
+  cors: {
+    origin: ["http://localhost:3000", "http://localhost:3001"],
+    methods: ["GET", "POST"]
+  }
+});
 
 app.use(cors());
 
@@ -30,7 +30,7 @@ io.on('connection' , (socket) => {
 
   socket.on('chat message', (data) => {
     const { roomId, sender, message, sentTime } = data;
-    console.log(`Received message: ${message} in room: ${roomId}`);
+    console.log(`[${roomId}] UserId_${sender}: ${message}`);
     io.to(roomId).emit('chat message', data);
   });
 

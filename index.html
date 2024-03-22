@@ -28,7 +28,7 @@
         const socket = io();
         socket.on('connect', () => {
           console.log('Connected to server');
-          socket.emit('joinRoom','roomId_1','userId_2'); // Join the chat room when connected
+          //socket.emit('joinRoom',1,1); // Join the chat room when connected
 
 
           const form = document.getElementById('form');
@@ -36,18 +36,18 @@
           const messages = document.getElementById('messages');
 
           form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (input.value) {
-              const data = {
-                roomId: 'roomId_1', // Replace 'your-room-id' with the actual room ID
-                sender: 'userId_2',
-                message: message.trim(),
-                sentTime: "null"
-              };
-              socket.emit('chat message', data);
-              input.value = '';
-            }
-          });
+          e.preventDefault();
+          if (input.value) {
+            const data = {
+              roomId: 1, // Replace 'your-room-id' with the actual room ID
+              sender: 1,
+              message: input.value.trim(), // Use input.value.trim() instead of message.trim()
+              sentTime: "null"
+            };
+            socket.emit('chat message', data);
+            input.value = '';
+          }
+        });
 
           socket.on('chat message', (data) => {
             const { roomId, sender, message, sentTime } = data;
