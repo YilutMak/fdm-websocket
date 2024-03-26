@@ -6,9 +6,15 @@ const cors = require('cors');
 
 const app = express();
 const server = createServer(app);
+// const io = new Server(server, {
+//   cors: {
+//     origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
+//     methods: ["GET", "POST"]
+//   }
+// });
+
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
     methods: ["GET", "POST"]
   }
 });
@@ -39,6 +45,12 @@ io.on('connection' , (socket) => {
   });
 });
 
-server.listen(8000, () => {
-  console.log('server running at http://localhost:8000');
+const port = process.env.PORT || 8000;
+
+server.listen(port, () => {
+  console.log(`server running at http://fdm-websocket-production.up.railway.app:${port}`);
 });
+
+// server.listen(8000, () => {
+//   console.log('server running at http://localhost:8000');
+//   });
