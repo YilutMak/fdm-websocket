@@ -35,7 +35,7 @@ io.on('connection' , (socket) => {
   });
 
   socket.on('chat message', (data) => {
-    const { roomId, sender, message, sentTime } = data;
+    const { roomId, sender, message, sentTime, sender_name } = data;
     console.log(`[${roomId}] UserId_${sender}: ${message}`);
     io.to(roomId).emit('chat message', data);
   });
